@@ -1,0 +1,12 @@
+# Environment variables
+.env
+
+# Firebase local cache
+.firebase
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/

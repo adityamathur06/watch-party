@@ -1,0 +1,142 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
+  backdrop-filter: blur(6px);
+}
+
+
+.modal {
+  background: var(--bg-light);
+  padding: 2rem;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  position: relative;
+  animation: popIn 0.25s ease;
+}
+
+.modal h2 {
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal input {
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #111;
+  color: white;
+  font-size: 0.95rem;
+  transition: border-color 0.5s ease;
+}
+
+.modal input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: white;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ========== MODAL TEXT ========== */
+.modal-text {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+/* ========== ROOM OPTIONS ========== */
+.room-options {
+  display: flex;
+  gap: 1rem;
+}
+
+.room-options .btn {
+  flex: 1;
+}
+
+/* ========== ROOM CODE BOX ========== */
+.room-code-box {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 10px;
+
+  background: #111;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+
+  text-align: center;
+}
+
+.room-code {
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* ========== JOIN ROOM INPUT ========== */
+.room-code-input {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* ========== DISABLED BUTTON ========== */
+.btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ========== COMING SOON BADGE ========== */
+.badge {
+  margin-left: 0.4rem;
+  font-size: 0.65rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+}
+

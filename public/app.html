@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Party</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/auth.css">
+
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="logo">Watch Party</div>
+
+        <div class="user-menu">
+            <button class="user-trigger" id="user-trigger">
+                <span id="user-name">Hi</span>
+                <span class="caret">▾</span>
+            </button>
+
+            <div class="dropdown hidden" id="user-dropdown">
+                <button id="logout-btn">Log out</button>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="app-main">
+
+        <section class="hero">
+            <h1>Watch Party</h1>
+
+            <p class="tagline">
+                Watch movies together. Talk in real time.
+            </p>
+
+            <p class="description">
+                Watch Party lets you create private rooms where you and your friends
+                can watch videos together in sync and chat in real time — no matter
+                where you are.
+            </p>
+
+            <p class="author">
+                Built by <strong>Aditya</strong>
+            </p>
+        </section>
+
+        <section class="actions">
+            <button class="btn primary" id="create-room-btn">Create a Room</button>
+            <button class="btn secondary" id="join-room-btn">Join a Room</button>
+        </section>
+
+    </main>
+
+    <div id="room-overlay" class="overlay">
+
+        <div class="modal hidden" id="room-type-modal">
+            <button class="close-btn">&times;</button>
+            <h2>Create a Room</h2>
+
+            <p class="modal-text">
+                What kind of room do you want to create?
+            </p>
+
+            <div class="room-options">
+                <button class="btn primary" id="chat-room-btn">Chat Room</button>
+                <button class="btn secondary disabled" disabled>
+                    VC Room
+                    <span class="badge">Coming soon</span>
+                </button>
+
+            </div>
+        </div>
+
+        <div class="modal hidden" id="room-code-modal">
+            <button class="close-btn">&times;</button>
+            <h2>Your Room is Ready</h2>
+
+            <p class="modal-text">
+                Share this code with up to <strong>3 friends</strong>
+            </p>
+
+            <div class="room-code-box">
+                <span class="room-code">ABCD-1234</span>
+            </div>
+
+            <button class="btn primary">Go to Room</button>
+        </div>
+
+        <!-- JOIN ROOM MODAL -->
+        <div class="modal hidden" id="join-room-modal">
+            <button class="close-btn">&times;</button>
+            <h2>Join a Room</h2>
+
+            <p class="modal-text">
+                Enter the room code shared by your friend
+            </p>
+
+            <form>
+                <input type="text" placeholder="Room Code" class="room-code-input" required />
+                <button type="submit" class="btn primary">Join Room</button>
+            </form>
+        </div>
+
+
+    </div>
+
+
+    <script type="module" src="js/app.js"></script>
+
+</body>
+
+</html>

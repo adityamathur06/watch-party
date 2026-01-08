@@ -86,22 +86,25 @@
 
             <div class="room-code-box">
                 <span class="room-code">ABCD-1234</span>
+                <button class="copy-btn" id="copy-room-code-btn">Copy</button>
             </div>
+
 
             <button class="btn primary">Go to Room</button>
         </div>
 
-        <!-- JOIN ROOM MODAL -->
         <div class="modal hidden" id="join-room-modal">
             <button class="close-btn">&times;</button>
             <h2>Join a Room</h2>
 
+            
             <p class="modal-text">
                 Enter the room code shared by your friend
             </p>
-
+            
             <form>
                 <input type="text" placeholder="Room Code" class="room-code-input" required />
+                <p class="form-error" id="join-room-error"></p>
                 <button type="submit" class="btn primary">Join Room</button>
             </form>
         </div>

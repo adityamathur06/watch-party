@@ -1,0 +1,107 @@
+.room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: #111;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.room-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr 320px;
+  height: calc(100vh - 64px);
+  transition: grid-template-columns 0.3s ease;
+}
+
+.room-layout.sidebar-collapsed .members-panel {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.room-layout.sidebar-collapsed {
+  grid-template-columns: 0 1fr 320px;
+}
+
+#toggleMembers {
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.members-panel {
+  background: rgba(0, 0, 0, 0.4);
+  border-right: 1px solid rgba(255,255,255,0.1);
+  padding: 1rem;
+  overflow: hidden;              /* 🔑 critical */
+  transition: opacity 0.2s ease; /* smooth hide */
+}
+
+.members-section {
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+}
+
+#members-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+#members-list li {
+  padding: 0.4rem 0;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.video-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+}
+
+.video-placeholder {
+  color: #777;
+  font-size: 1.1rem;
+}
+
+.chat-panel {
+  background: rgba(0,0,0,0.45);
+  border-left: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #666;
+}
+
+#members-list li.host {
+  font-weight: 600;
+  color: #ff9f43;
+}
+
+.room-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.toggle-btn:hover {
+  color: #fff;
+}

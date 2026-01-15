@@ -74,3 +74,12 @@ export async function joinRoom({ roomId, userId, userName }) {
 
     return true;
 }
+
+
+export async function activateRoom(roomId) {
+  const roomRef = doc(db, "rooms", roomId);
+
+  await updateDoc(roomRef, {
+    status: "active"
+  });
+}

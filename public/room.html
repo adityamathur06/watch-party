@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Watch Party – Room</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/room.css" />
+</head>
+
+<body>
+    <header class="room-header">
+        <div class="room-header-left">
+            <button id="toggleMembers" class="toggle-btn">☰</button>
+            <h1>Room</h1>
+        </div>
+
+        <button id="leaveRoomBtn" class="leave-room-btn">Leave Room</button>
+
+    </header>
+
+    <main class="room-layout">
+
+        <aside class="members-panel">
+            <h2 class="members-title">Members</h2>
+            <ul id="members-list"></ul>
+        </aside>
+
+
+        <section class="video-area">
+            <p class="video-placeholder">Movie will appear here</p>
+        </section>
+
+        <aside class="chat-panel">
+            <p class="chat-placeholder">Chat will appear here</p>
+        </aside>
+
+    </main>
+
+
+    <script type="module" src="js/room.js"></script>
+</body>
+
+</html>

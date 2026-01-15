@@ -6,6 +6,7 @@ import { joinRoom } from "./services/roomService.js";
 
 let currentUser = null;
 let currentUserName = null;
+let currentRoomId = null;
 
 const userName = document.getElementById("user-name")
 
@@ -103,6 +104,7 @@ chatRoomBtn.addEventListener("click", async () => {
             userName: currentUserName,
             type: "chat"
         });
+        currentRoomId = roomId;
 
         document.querySelector(".room-code").textContent = roomId;
         openRoomModal(roomCodeModal);
@@ -158,11 +160,11 @@ joinRoomForm.addEventListener("submit", async (e) => {
             userId: currentUser.uid,
             userName: currentUserName
         });
-
-        alert("Joined room successfully!");
+        window.location.href = `room.html?room=${roomId}`;
 
     } catch (err) {
         console.error(err);
+
         if (
             err.code === "permission-denied" ||
             err.message.toLowerCase().includes("permission")
@@ -175,4 +177,16 @@ joinRoomForm.addEventListener("submit", async (e) => {
 
         joinRoomError.style.display = "block";
     }
+});
+
+
+const goToRoomBtn = document.getElementById("go-to-room-btn");
+
+goToRoomBtn.addEventListener("click", () => {
+    if (!currentRoomId) {
+        alert("Room not found.");
+        return;
+    }
+
+    window.location.href = `room.html?room=${currentRoomId}`;
 });

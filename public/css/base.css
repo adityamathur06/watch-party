@@ -93,3 +93,18 @@ body::before {
 .hidden {
   display: none;
 }
+
+.leave-room-btn {
+  background: rgba(255, 77, 77, 0.15);
+  border: 1px solid rgba(255, 77, 77, 0.4);
+  color: #ff4d4d;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.leave-room-btn:hover {
+  background: rgba(255, 77, 77, 0.25);
+}

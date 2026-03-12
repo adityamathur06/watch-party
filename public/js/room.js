@@ -9,7 +9,8 @@ import {
     addDoc,
     serverTimestamp,
     query,
-    orderBy
+    orderBy,
+    setDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -22,9 +23,12 @@ let currentUserName = "User";
 let roomHostId = null;
 let isInRoom = true;
 let membersListening = false;
+let isApplyingRemoteUpdate = false;
 
 const params = new URLSearchParams(window.location.search);
 const roomId = params.get("room");
+
+const playbackRef = doc(db, "rooms", roomId, "playback", "state");
 
 if (!roomId) {
     alert("Invalid room");
@@ -118,14 +122,39 @@ function initializeRoom() {
         const roomData = snapshot.data();
         roomHostId = roomData.hostId;
 
+        if (currentUser.uid !== roomHostId) {
+            video.controls = false;
+        }
+
+        if (currentUser.uid === roomHostId) {
+            initializePlaybackState();
+        }
+
+
         if (!membersListening) {
             listenToMembers();
             membersListening = true;
         }
+        attachHostVideoListeners();
     });
 
     listenToMessages();
+    loadVideoFromPlaybackState();
 }
+
+async function initializePlaybackState() {
+    const playbackSnap = await getDoc(playbackRef);
+    if (playbackSnap.exists()) return;
+
+    await setDoc(playbackRef, {
+        videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        isPlaying: false,
+        currentTime: 0,
+        hostId: currentUser.uid,
+        updatedAt: serverTimestamp()
+    });
+}
+
 
 function listenToMembers() {
     const membersRef = collection(db, "rooms", roomId, "members");
@@ -195,4 +224,73 @@ async function leaveRoom() {
 
 if (leaveRoomBtn) {
     leaveRoomBtn.addEventListener("click", leaveRoom);
+}
+
+
+const video = document.getElementById("roomVideo");
+
+function loadVideoFromPlaybackState() {
+    onSnapshot(playbackRef, (snapshot) => {
+        if (!snapshot.exists()) return;
+
+        const data = snapshot.data();
+
+        if (data.videoUrl && video.src !== data.videoUrl) {
+            video.src = data.videoUrl;
+        }
+
+        isApplyingRemoteUpdate = true;
+
+        if (typeof data.currentTime === "number") {
+            const diff = Math.abs(video.currentTime - data.currentTime);
+            if (diff > 0.5) {
+                video.currentTime = data.currentTime;
+            }
+        }
+
+        if (data.isPlaying) {
+            if (video.paused) video.play();
+        } else {
+            if (!video.paused) video.pause();
+        }
+
+        isApplyingRemoteUpdate = false;
+    });
+}
+
+function attachHostVideoListeners() {
+    if (currentUser.uid !== roomHostId) return;
+
+    video.addEventListener("play", () => {
+        if (isApplyingRemoteUpdate) return;
+
+        updatePlaybackState({
+            isPlaying: true,
+            currentTime: video.currentTime
+        });
+    });
+
+    video.addEventListener("pause", () => {
+        if (isApplyingRemoteUpdate) return;
+
+        updatePlaybackState({
+            isPlaying: false,
+            currentTime: video.currentTime
+        });
+    });
+
+    video.addEventListener("seeked", () => {
+        if (isApplyingRemoteUpdate) return;
+
+        updatePlaybackState({
+            currentTime: video.currentTime
+        });
+    });
+}
+
+async function updatePlaybackState(partialState) {
+    await updateDoc(playbackRef, {
+        ...partialState,
+        updatedAt: serverTimestamp()
+    });
 }

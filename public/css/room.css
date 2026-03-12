@@ -4,10 +4,15 @@ html, body {
   overflow: hidden;
 }
 
+body.room-body {
+  background-attachment: scroll;
+}
+
 .room-page {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100svh;
+  overflow: hidden;
 }
 
 .room-header {
@@ -22,7 +27,9 @@ html, body {
 .room-layout {
   display: grid;
   grid-template-columns: 260px 1fr 320px;
+  min-height: 0;
   height: 100%;
+  overflow: hidden;
   transition: grid-template-columns 0.3s ease;
 }
 
@@ -47,10 +54,10 @@ html, body {
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1rem;
   overflow: hidden;
-  /* 🔑 critical */
+  min-height: 0;
   transition: opacity 0.2s ease;
-  /* smooth hide */
 }
+
 
 .members-section {
   border-right: 1px solid rgba(255, 255, 255, 0.1);
@@ -87,6 +94,8 @@ html, body {
   display: flex;
   flex-direction: column;
   height: 100%;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .chat-placeholder {
@@ -118,12 +127,6 @@ html, body {
 
 .toggle-btn:hover {
   color: #fff;
-}
-
-.chat-panel {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 }
 
 .chat-messages {
@@ -174,6 +177,7 @@ html, body {
 }
 
 .chat-input {
+  flex-shrink: 0;
   display: flex;
   padding: 0.6rem;
   gap: 0.5rem;
@@ -198,4 +202,11 @@ html, body {
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
+}
+
+.video-area video {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 12px;
+  background: #000;
 }

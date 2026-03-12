@@ -8,41 +8,42 @@
     <link rel="stylesheet" href="css/room.css" />
 </head>
 
-<body>
+<body class="room-body">
     <div class="room-page">
-    <header class="room-header">
-        <div class="room-header-left">
-            <button id="toggleMembers" class="toggle-btn">☰</button>
-            <h1>Room</h1>
-        </div>
+        <header class="room-header">
+            <div class="room-header-left">
+                <button id="toggleMembers" class="toggle-btn">☰</button>
+                <h1>Room</h1>
+            </div>
 
-        <button id="leaveRoomBtn" class="leave-room-btn">Leave Room</button>
+            <button id="leaveRoomBtn" class="leave-room-btn">Leave Room</button>
 
-    </header>
+        </header>
 
-    <main class="room-layout">
+        <main class="room-layout">
 
-        <aside class="members-panel">
-            <h2 class="members-title">Members</h2>
-            <ul id="members-list"></ul>
-        </aside>
-
-
-        <section class="video-area">
-            <p class="video-placeholder">Movie will appear here</p>
-        </section>
-
-        <aside class="chat-panel">
-            <div class="chat-messages" id="chatMessages"></div>
-
-            <form class="chat-input" id="chatForm">
-                <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off" required />
-                <button type="submit">Send</button>
-            </form>
-        </aside>
+            <aside class="members-panel">
+                <h2 class="members-title">Members</h2>
+                <ul id="members-list"></ul>
+            </aside>
 
 
-    </main>
+            <div class="video-area">
+                <video id="roomVideo" controls preload="metadata"></video>
+            </div>
+
+
+            <aside class="chat-panel">
+                <div class="chat-messages" id="chatMessages"></div>
+
+                <form class="chat-input" id="chatForm">
+                    <input type="text" id="chatInput" placeholder="Type a message..." autocomplete="off" required />
+                    <button type="submit">Send</button>
+                </form>
+            </aside>
+
+
+        </main>
 
     </div>
 
